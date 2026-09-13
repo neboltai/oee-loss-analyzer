@@ -1,0 +1,120 @@
+{
+  "id": "startup-rejects-dominant",
+  "title": "Ramp-up scrap after every start",
+  "category": "quality",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-QUALI-21",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 60,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 390,
+      "good_count": 330
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 35,
+        "reason_code": "SETUP"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 25,
+        "reason_code": "MECH_FAIL"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "STARTUP_SCRAP",
+        "count": 40,
+        "phase": "startup"
+      },
+      {
+        "id": "Q-0002",
+        "defect_code": "STARTUP_SCRAP",
+        "count": 20,
+        "phase": "startup"
+      }
+    ],
+    "micro_stops": {
+      "count": 26,
+      "total_min": 18,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T09:56:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:03:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:10:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T09:17:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.875,
+      "performance": 0.9286,
+      "quality": 0.8462,
+      "oee": 0.6875
+    },
+    "primary_loss_bucket": "startup_rejects",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

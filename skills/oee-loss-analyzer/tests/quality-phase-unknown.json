@@ -1,0 +1,106 @@
+{
+  "id": "quality-phase-unknown",
+  "title": "Rejects recorded without a phase",
+  "category": "quality",
+  "note": "phase unknown blocks the loss-5 / loss-6 split",
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-QUALI-23",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 30,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 430,
+      "good_count": 375
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 20,
+        "reason_code": "MECH_FAIL"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 10,
+        "reason_code": "SETUP"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "SURFACE",
+        "count": 55,
+        "phase": "unknown"
+      }
+    ],
+    "micro_stops": {
+      "count": 18,
+      "total_min": 12,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T09:56:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:03:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      }
+    ]
+  },
+  "expected": {
+    "status": "insufficient_evidence",
+    "metrics": {
+      "availability": 0.9375,
+      "performance": 0.9556,
+      "quality": 0.8721,
+      "oee": 0.7812
+    },
+    "primary_loss_bucket": "unclassified_quality",
+    "root_cause_claim_allowed": false,
+    "confidence_range": [
+      0.05,
+      0.7
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

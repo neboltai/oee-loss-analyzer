@@ -1,0 +1,46 @@
+{
+  "name": "oee-loss-analyzer",
+  "version": "0.4.0",
+  "description": "Community Edition for deterministic OEE metrics and evidence-gated manufacturing loss analysis.",
+  "author": {
+    "name": "Sylvain Gerbe",
+    "url": "https://nebolt.ai"
+  },
+  "homepage": "https://nebolt.ai/oee-loss-analyzer/",
+  "license": "MIT",
+  "keywords": [
+    "oee",
+    "manufacturing",
+    "lean",
+    "tpm",
+    "six-big-losses",
+    "downtime",
+    "mes",
+    "erp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": {
+    "shopfloor-data": {
+      "command": "python3",
+      "args": ["./mcp/server.py"],
+      "env": {
+        "OEE_MCP_BACKEND": "mock"
+      }
+    }
+  },
+  "interface": {
+    "displayName": "OEE Loss Analyzer",
+    "shortDescription": "Evidence-gated manufacturing loss analysis",
+    "longDescription": "Calculate OEE deterministically, classify the Six Big Losses, and separate supported findings from hypotheses.",
+    "developerName": "Sylvain Gerbe",
+    "category": "Productivity",
+    "capabilities": ["Analyze", "Read"],
+    "websiteURL": "https://nebolt.ai/oee-loss-analyzer/",
+    "defaultPrompt": [
+      "Analyze this production dataset and rank its OEE losses.",
+      "Explain which OEE loss claims the evidence supports.",
+      "Build the fictional demo OEE dataset for this machine and period."
+    ],
+    "brandColor": "#228B22"
+  }
+}

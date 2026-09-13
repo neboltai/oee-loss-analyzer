@@ -1,0 +1,36 @@
+{
+  "id": "zero-planned-time",
+  "title": "Planned production time is zero",
+  "category": "impossible",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-IMPOS-49",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 0,
+      "downtime_min": 0,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 0,
+      "good_count": 0
+    }
+  },
+  "expected": {
+    "status": "data_error",
+    "metrics": null,
+    "primary_loss_bucket": null,
+    "root_cause_claim_allowed": false,
+    "confidence_range": [
+      0.0,
+      0.0
+    ],
+    "must_flag": [
+      "ZERO_PLANNED_TIME"
+    ],
+    "tie_with": []
+  }
+}

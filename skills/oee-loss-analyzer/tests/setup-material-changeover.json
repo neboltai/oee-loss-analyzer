@@ -1,0 +1,103 @@
+{
+  "id": "setup-material-changeover",
+  "title": "Material changeovers plus repeated adjustment",
+  "category": "setup",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-SETUP-18",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 600,
+      "downtime_min": 130,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 455,
+      "good_count": 450
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 70,
+        "reason_code": "MAT_CHANGEOVER"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 35,
+        "reason_code": "ADJUST"
+      },
+      {
+        "id": "DT-0003",
+        "duration_min": 25,
+        "reason_code": "ADJUST"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "COLOR",
+        "count": 5,
+        "phase": "steady_state"
+      }
+    ],
+    "micro_stops": {
+      "count": 12,
+      "total_min": 9,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.7833,
+      "performance": 0.9681,
+      "quality": 0.989,
+      "oee": 0.75
+    },
+    "primary_loss_bucket": "setup_and_adjustments",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "negative-downtime",
+  "title": "Negative downtime value",
+  "category": "impossible",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-IMPOS-46",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": -20,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 400,
+      "good_count": 395
+    }
+  },
+  "expected": {
+    "status": "data_error",
+    "metrics": null,
+    "primary_loss_bucket": null,
+    "root_cause_claim_allowed": false,
+    "confidence_range": [
+      0.0,
+      0.0
+    ],
+    "must_flag": [
+      "NEGATIVE_VALUE"
+    ],
+    "tie_with": []
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "id": "microstops-escalation-boundary",
+  "title": "Four 'jams' at or above the 5-minute threshold",
+  "category": "microstops",
+  "note": "threshold is inclusive: >= 5 min escalates",
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-MICRO-28",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 40,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 420,
+      "good_count": 418
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 5,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 5,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0003",
+        "duration_min": 6,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0004",
+        "duration_min": 6,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0005",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0006",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0007",
+        "duration_min": 10,
+        "reason_code": "SETUP"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "BURR",
+        "count": 2,
+        "phase": "steady_state"
+      }
+    ],
+    "micro_stops": {
+      "count": 18,
+      "total_min": 12,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T09:56:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:03:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.9167,
+      "performance": 0.9545,
+      "quality": 0.9952,
+      "oee": 0.8708
+    },
+    "primary_loss_bucket": "breakdowns",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

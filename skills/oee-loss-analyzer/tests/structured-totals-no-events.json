@@ -1,0 +1,43 @@
+{
+  "id": "structured-totals-no-events",
+  "title": "Structured totals only, with no stop-event log",
+  "category": "missing",
+  "note": "metrics are valid and must still be reported",
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-MISSI-39",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "structured production record"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 75,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 390,
+      "good_count": 385
+    }
+  },
+  "expected": {
+    "status": "insufficient_evidence",
+    "metrics": {
+      "availability": 0.8438,
+      "performance": 0.963,
+      "quality": 0.9872,
+      "oee": 0.8021
+    },
+    "primary_loss_bucket": "unclassified_downtime",
+    "root_cause_claim_allowed": false,
+    "confidence_range": [
+      0.05,
+      0.7
+    ],
+    "must_flag": [
+      "NO_DOWNTIME_EVENTS",
+      "NO_QUALITY_EVENTS",
+      "NO_SPEED_EVIDENCE"
+    ],
+    "tie_with": []
+  }
+}

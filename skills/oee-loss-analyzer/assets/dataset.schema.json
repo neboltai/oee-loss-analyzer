@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nebolt.ai/schemas/oee-dataset.schema.json",
+  "title": "OEE production dataset",
+  "type": "object",
+  "required": ["production"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "machine_id": {"type": "string"},
+        "line": {"type": "string"},
+        "shift": {"type": "string"},
+        "date": {"type": "string"},
+        "product": {"type": "string"},
+        "source": {"type": "string", "description": "MES, ERP, CSV, XLSX, PDF, photo, SQL, text"},
+        "collected_at": {"type": "string"}
+      }
+    },
+    "production": {
+      "type": "object",
+      "required": ["planned_production_time_min", "downtime_min", "ideal_cycle_time_sec", "total_count"],
+      "oneOf": [
+        {"required": ["good_count"], "not": {"required": ["reject_count"]}},
+        {"required": ["reject_count"], "not": {"required": ["good_count"]}}
+      ],
+      "properties": {
+        "planned_production_time_min": {"type": "number", "minimum": 0},
+        "downtime_min": {"type": "number", "minimum": 0},
+        "ideal_cycle_time_sec": {"type": "number", "exclusiveMinimum": 0},
+        "total_count": {"type": "number", "minimum": 0},
+        "good_count": {"type": "number", "minimum": 0},
+        "reject_count": {"type": "number", "minimum": 0,
+                         "description": "alternative to good_count; never both required, never invented"},
+        "all_time_min": {"type": "number", "minimum": 0,
+                         "description": "calendar time; only supply it if TEEP is wanted"}
+      }
+    },
+    "downtime_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["duration_min"],
+        "properties": {
+          "id": {"type": "string"},
+          "machine_id": {"type": "string"},
+          "start": {"type": "string"},
+          "end": {"type": "string"},
+          "duration_min": {"type": "number", "minimum": 0},
+          "reason_code": {"type": ["string", "null"]},
+          "component": {"type": "string"},
+          "family": {"type": "string", "description": "optional canonical technical family, e.g. hydraulic"},
+          "description": {"type": "string"}
+        }
+      }
+    },
+    "quality_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["count"],
+        "properties": {
+          "id": {"type": "string"},
+          "defect_code": {"type": "string"},
+          "count": {"type": "number", "minimum": 0},
+          "phase": {"type": "string", "enum": ["startup", "steady_state", "unknown"]}
+        }
+      }
+    },
+    "machine_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "machine_id": {"type": "string"},
+          "ts": {"type": "string"},
+          "type": {"type": "string", "description": "alarm, state_change, speed, counter"},
+          "code": {"type": "string"},
+          "component": {"type": "string"},
+          "family": {"type": "string", "description": "optional canonical technical family, e.g. hydraulic"},
+          "text": {"type": "string"}
+        }
+      }
+    },
+    "micro_stops": {
+      "type": "object",
+      "properties": {
+        "count": {"type": "number", "minimum": 0},
+        "total_min": {"type": "number", "minimum": 0},
+        "source": {"type": "string"}
+      }
+    },
+    "speed_log": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "ts": {"type": "string"},
+          "actual_cycle_time_sec": {"type": "number", "exclusiveMinimum": 0}
+        }
+      }
+    },
+    "orders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "order_id": {"type": "string"},
+          "machine_id": {"type": "string"},
+          "product": {"type": "string"},
+          "start": {"type": "string"},
+          "end": {"type": "string"},
+          "qty": {"type": "number"}
+        }
+      }
+    },
+    "maintenance_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "wo_id": {"type": "string"},
+          "machine_id": {"type": "string"},
+          "date": {"type": "string"},
+          "type": {"type": "string", "enum": ["preventive", "corrective", "inspection", "modification"]},
+          "component": {"type": "string"},
+          "family": {"type": "string", "description": "optional canonical technical family, e.g. hydraulic"},
+          "text": {"type": "string"}
+        }
+      }
+    },
+    "code_map": {
+      "type": "object",
+      "description": "site reason text -> canonical reason code",
+      "additionalProperties": {"type": "string"}
+    },
+    "config": {
+      "type": "object",
+      "properties": {
+        "thresholds": {
+          "type": "object",
+          "properties": {
+            "minor_stop_threshold_min": {"type": "number"},
+            "event_sum_tolerance_min": {"type": "number"},
+            "cycle_time_tolerance_min": {"type": "number"},
+            "unclassified_downtime_ratio": {"type": "number"},
+            "significant_bucket_ratio": {"type": "number"},
+            "attribution_coverage_min": {"type": "number"},
+            "insufficient_evidence_below": {"type": "number"},
+            "low_sample_units": {"type": "number"},
+            "alarm_correlation_window_sec": {"type": "number", "minimum": 0},
+            "maintenance_correlation_window_days": {"type": "number", "minimum": 0},
+            "order_boundary_window_sec": {"type": "number", "minimum": 0}
+          }
+        }
+      }
+    }
+  }
+}

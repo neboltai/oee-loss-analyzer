@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "shopfloor-data": {
+      "command": "python3",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/server.py"],
+      "env": {
+        "OEE_MCP_BACKEND": "mock",
+        "OEE_MCP_MOCK_DIR": "${CLAUDE_PLUGIN_ROOT}/mcp/mock_data"
+      }
+    }
+  }
+}

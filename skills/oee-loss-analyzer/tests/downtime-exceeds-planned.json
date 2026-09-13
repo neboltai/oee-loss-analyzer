@@ -1,0 +1,43 @@
+{
+  "id": "downtime-exceeds-planned",
+  "title": "More downtime than planned production time",
+  "category": "impossible",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-IMPOS-44",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 520,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 300,
+      "good_count": 298
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 520,
+        "reason_code": "MECH_FAIL"
+      }
+    ]
+  },
+  "expected": {
+    "status": "data_error",
+    "metrics": null,
+    "primary_loss_bucket": null,
+    "root_cause_claim_allowed": false,
+    "confidence_range": [
+      0.0,
+      0.0
+    ],
+    "must_flag": [
+      "DOWNTIME_EXCEEDS_PLANNED"
+    ],
+    "tie_with": []
+  }
+}

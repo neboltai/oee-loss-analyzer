@@ -1,0 +1,74 @@
+[
+  {
+    "id": "DT-0031",
+    "machine_id": "L1-PRESS-02",
+    "shift": "S1",
+    "start": "2026-09-08T08:12:00+02:00",
+    "duration_min": 35,
+    "reason_code": "MECH_FAIL",
+    "description": "Hydraulik Druckabfall, Presse gestoppt"
+  },
+  {
+    "id": "DT-0034",
+    "machine_id": "L1-PRESS-02",
+    "shift": "S1",
+    "start": "2026-09-08T11:40:00+02:00",
+    "duration_min": 18,
+    "reason_code": "MECH_FAIL",
+    "description": "Hydraulik Druckabfall, zweiter Vorfall"
+  },
+  {
+    "id": "DT-0036",
+    "machine_id": "L1-PRESS-02",
+    "shift": "S1",
+    "start": "2026-09-08T13:05:00+02:00",
+    "duration_min": 9,
+    "reason_code": "SETUP",
+    "description": "Werkzeugjustage"
+  },
+  {
+    "id": "DT-0041",
+    "machine_id": "L1-PRESS-02",
+    "shift": "S2",
+    "start": "2026-09-08T14:20:00+02:00",
+    "duration_min": 40,
+    "reason_code": "CHANGEOVER",
+    "description": "Umruesten auf ART-4471-B"
+  },
+  {
+    "id": "DT-0043",
+    "machine_id": "L1-PRESS-02",
+    "shift": "S2",
+    "start": "2026-09-08T16:02:00+02:00",
+    "duration_min": 4,
+    "reason_code": "JAM",
+    "description": "Teil verklemmt am Auswerfer"
+  },
+  {
+    "id": "DT-0044",
+    "machine_id": "L1-PRESS-02",
+    "shift": "S2",
+    "start": "2026-09-08T17:11:00+02:00",
+    "duration_min": 3,
+    "reason_code": "JAM",
+    "description": "Teil verklemmt am Auswerfer"
+  },
+  {
+    "id": "DT-0045",
+    "machine_id": "L1-PRESS-02",
+    "shift": "S2",
+    "start": "2026-09-08T19:30:00+02:00",
+    "duration_min": 48,
+    "reason_code": "MECH_FAIL",
+    "description": "Hydraulik Druckabfall, Pumpe getauscht"
+  },
+  {
+    "id": "DT-0052",
+    "machine_id": "L2-MILL-07",
+    "shift": "S1",
+    "start": "2026-09-08T09:45:00+02:00",
+    "duration_min": 28,
+    "reason_code": "TOOL_CHANGE",
+    "description": "Planned tool change"
+  }
+]

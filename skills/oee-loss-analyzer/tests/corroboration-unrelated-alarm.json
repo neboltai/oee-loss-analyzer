@@ -1,0 +1,25 @@
+{
+  "id": "corroboration-unrelated-alarm",
+  "title": "A temporally close but technically unrelated alarm is not corroboration",
+  "category": "corroboration",
+  "dataset": {
+    "meta": {"machine_id": "M1", "date": "2026-09-08", "source": "MES"},
+    "production": {"planned_production_time_min": 480, "downtime_min": 90, "ideal_cycle_time_sec": 60, "total_count": 380, "good_count": 376},
+    "downtime_events": [
+      {"id": "DT-1", "machine_id": "M1", "start": "2026-09-08T14:12:00+02:00", "duration_min": 90, "reason_code": "HYD_FAIL", "description": "Hydraulic pressure loss"}
+    ],
+    "machine_events": [
+      {"id": "AL-OTHER", "machine_id": "M1", "ts": "2026-09-08T14:11:40+02:00", "type": "alarm", "code": "ELEC_FAIL", "text": "Electrical cabinet temperature"}
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {"availability": 0.8125, "performance": 0.9744, "quality": 0.9895, "oee": 0.7833},
+    "primary_loss_bucket": "breakdowns",
+    "root_cause_claim_allowed": false,
+    "confidence_range": [0.35, 0.95],
+    "must_flag": [],
+    "tie_with": [],
+    "corroboration_pairs": []
+  }
+}

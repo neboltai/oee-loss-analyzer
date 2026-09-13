@@ -1,0 +1,103 @@
+{
+  "id": "setup-with-first-article",
+  "title": "Setup plus first-article approval and warm-up",
+  "category": "setup",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-SETUP-15",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 110,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 360,
+      "good_count": 352
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 60,
+        "reason_code": "SETUP"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 30,
+        "reason_code": "FIRST_ARTICLE"
+      },
+      {
+        "id": "DT-0003",
+        "duration_min": 20,
+        "reason_code": "WARMUP"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "STARTUP_SCRAP",
+        "count": 8,
+        "phase": "startup"
+      }
+    ],
+    "micro_stops": {
+      "count": 8,
+      "total_min": 6,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.7708,
+      "performance": 0.973,
+      "quality": 0.9778,
+      "oee": 0.7333
+    },
+    "primary_loss_bucket": "setup_and_adjustments",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

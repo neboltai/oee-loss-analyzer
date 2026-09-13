@@ -1,0 +1,64 @@
+{
+  "id": "microstops-unrecorded",
+  "title": "Large performance loss with no speed or micro-stop evidence",
+  "category": "microstops",
+  "note": "the most common real-world case: micro-stops invisible in the data",
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-MICRO-25",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 30,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 380,
+      "good_count": 378
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 20,
+        "reason_code": "SETUP"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0003",
+        "duration_min": 3,
+        "reason_code": "MISFEED"
+      },
+      {
+        "id": "DT-0004",
+        "duration_min": 3,
+        "reason_code": "CLEAN"
+      }
+    ]
+  },
+  "expected": {
+    "status": "insufficient_evidence",
+    "metrics": {
+      "availability": 0.9375,
+      "performance": 0.8444,
+      "quality": 0.9947,
+      "oee": 0.7875
+    },
+    "primary_loss_bucket": "unclassified_performance",
+    "root_cause_claim_allowed": false,
+    "confidence_range": [
+      0.05,
+      0.7
+    ],
+    "must_flag": [
+      "NO_SPEED_EVIDENCE",
+      "NO_QUALITY_EVENTS"
+    ],
+    "tie_with": []
+  }
+}

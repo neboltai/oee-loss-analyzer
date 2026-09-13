@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "dataset_id": "community-fictional-demo",
+    "machine_id": "DEMO-LINE-01",
+    "product": "DEMO-PRODUCT-A",
+    "date": "2026-01-15",
+    "shift": "DEMO-SHIFT",
+    "source": "fictional-community-example"
+  },
+  "production": {
+    "planned_production_time_min": 480,
+    "downtime_min": 62,
+    "ideal_cycle_time_sec": 12,
+    "total_count": 1850,
+    "reject_count": 38
+  },
+  "downtime_events": [
+    {
+      "id": "DT-DEMO-001",
+      "machine_id": "DEMO-LINE-01",
+      "start": "2026-01-15T08:10:00Z",
+      "duration_min": 35,
+      "reason_code": "MECH_FAIL",
+      "description": "Fictional material-feed stoppage"
+    }
+  ],
+  "machine_events": [
+    {
+      "id": "AL-DEMO-001",
+      "machine_id": "DEMO-LINE-01",
+      "ts": "2026-01-15T08:10:18Z",
+      "type": "alarm",
+      "code": "FEED_JAM",
+      "text": "Fictional material feed jam"
+    }
+  ],
+  "maintenance_history": [
+    {
+      "wo_id": "WO-DEMO-001",
+      "machine_id": "DEMO-LINE-01",
+      "date": "2026-01-15T08:32:00Z",
+      "type": "corrective",
+      "component": "material feed",
+      "text": "Inspected fictional demo material-feed mechanism"
+    }
+  ]
+}

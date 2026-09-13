@@ -1,0 +1,168 @@
+{
+  "id": "microstops-plus-breakdown",
+  "title": "Minor stops outweigh a single large failure",
+  "category": "microstops",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-MICRO-27",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 90,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 360,
+      "good_count": 357
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 50,
+        "reason_code": "MECH_FAIL"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0003",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0004",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0005",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0006",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0007",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0008",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0009",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0010",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      },
+      {
+        "id": "DT-0011",
+        "duration_min": 4,
+        "reason_code": "JAM"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "BURR",
+        "count": 3,
+        "phase": "steady_state"
+      }
+    ],
+    "micro_stops": {
+      "count": 30,
+      "total_min": 20,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T09:56:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:03:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:10:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T09:17:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      }
+    ],
+    "maintenance_history": [
+      {
+        "wo_id": "WO-2251",
+        "date": "2026-09-05",
+        "type": "corrective",
+        "component": "hydraulic unit",
+        "text": "seal replaced"
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.8125,
+      "performance": 0.9231,
+      "quality": 0.9917,
+      "oee": 0.7438
+    },
+    "primary_loss_bucket": "idling_and_minor_stops",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

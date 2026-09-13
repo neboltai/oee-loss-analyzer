@@ -1,0 +1,98 @@
+{
+  "id": "no-operator",
+  "title": "Asset unmanned for two long periods",
+  "category": "external",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-EXTER-34",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 120,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 350,
+      "good_count": 349
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 70,
+        "reason_code": "NO_OPERATOR"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 50,
+        "reason_code": "NO_OPERATOR"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "BURR",
+        "count": 1,
+        "phase": "steady_state"
+      }
+    ],
+    "micro_stops": {
+      "count": 8,
+      "total_min": 6,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.75,
+      "performance": 0.9722,
+      "quality": 0.9971,
+      "oee": 0.7271
+    },
+    "primary_loss_bucket": "external_or_management_losses",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

@@ -1,0 +1,14 @@
+interface:
+  display_name: "OEE Loss Analyzer"
+  short_description: "Evidence-gated manufacturing loss analysis"
+  default_prompt: "Use $oee-loss-analyzer to analyze this production dataset and rank the supported OEE losses."
+
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "shopfloor-data"
+      description: "Fictional local demo data for the Community Edition"
+      transport: "stdio"
+
+policy:
+  allow_implicit_invocation: true

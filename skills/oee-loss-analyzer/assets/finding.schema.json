@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nebolt.ai/schemas/oee-finding.schema.json",
+  "title": "OEE loss finding",
+  "type": "object",
+  "required": ["problem", "evidence", "hypothesis", "recommended_action", "confidence"],
+  "additionalProperties": false,
+  "properties": {
+    "problem": {
+      "type": "string",
+      "minLength": 10,
+      "description": "One quantified sentence naming the asset and the loss. No causal claim unless cause_claimed is true."
+    },
+    "evidence": {
+      "type": "array",
+      "description": "Verifiable records only: event ids, field values, alarm codes, work-order numbers. An empty array forbids causal language in 'problem'.",
+      "items": {"type": "string"}
+    },
+    "hypothesis": {
+      "type": "array",
+      "description": "Explicitly unproven explanations, each naming the correlation it rests on.",
+      "items": {"type": "string"}
+    },
+    "recommended_action": {
+      "type": "array",
+      "description": "Actions. Under status insufficient_evidence these must be evidence-gathering steps only.",
+      "items": {"type": "string"}
+    },
+    "confidence": {
+      "type": "number",
+      "minimum": 0.05,
+      "maximum": 0.95,
+      "description": "Computed from attribution coverage, evidence channels and warning count. Never 1.0, never chosen by feel."
+    },
+    "bucket": {
+      "type": "string",
+      "enum": [
+        "breakdowns",
+        "setup_and_adjustments",
+        "idling_and_minor_stops",
+        "reduced_speed",
+        "process_defects",
+        "startup_rejects",
+        "external_or_management_losses",
+        "planned_inside_ppt",
+        "unclassified_downtime",
+        "unclassified_performance",
+        "unclassified_quality"
+      ]
+    },
+    "cause_claimed": {
+      "type": "boolean",
+      "description": "True only when the evidence gate in references/business-rules.md section 3 passed."
+    },
+    "corroboration": {
+      "type": "array",
+      "description": "Structured record-to-event matches. Mere presence of a record never appears here.",
+      "items": {
+        "type": "object",
+        "required": ["type", "event_id", "record_id", "temporal_distance_sec", "machine_match", "family_match", "match_basis"],
+        "additionalProperties": false,
+        "properties": {
+          "type": {"type": "string", "enum": ["alarm", "maintenance", "order_boundary"]},
+          "event_id": {"type": "string"},
+          "record_id": {"type": "string"},
+          "temporal_distance_sec": {"type": "number", "minimum": 0},
+          "machine_match": {"const": true},
+          "family_match": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "match_basis": {"type": "array", "minItems": 3, "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}

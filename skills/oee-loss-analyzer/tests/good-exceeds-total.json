@@ -1,0 +1,43 @@
+{
+  "id": "good-exceeds-total",
+  "title": "More good parts than parts produced",
+  "category": "impossible",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-IMPOS-45",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 60,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 400,
+      "good_count": 420
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 60,
+        "reason_code": "MECH_FAIL"
+      }
+    ]
+  },
+  "expected": {
+    "status": "data_error",
+    "metrics": null,
+    "primary_loss_bucket": null,
+    "root_cause_claim_allowed": false,
+    "confidence_range": [
+      0.0,
+      0.0
+    ],
+    "must_flag": [
+      "GOOD_EXCEEDS_TOTAL"
+    ],
+    "tie_with": []
+  }
+}

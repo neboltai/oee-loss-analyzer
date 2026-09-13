@@ -1,0 +1,115 @@
+{
+  "id": "normal-balanced-losses",
+  "title": "Balanced loss profile, breakdown marginally largest",
+  "category": "normal",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-NORMA-03",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 450,
+      "downtime_min": 30,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 400,
+      "good_count": 392
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 18,
+        "reason_code": "MECH_FAIL"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 12,
+        "reason_code": "SETUP"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "DIM_OOT",
+        "count": 8,
+        "phase": "steady_state"
+      }
+    ],
+    "micro_stops": {
+      "count": 20,
+      "total_min": 12,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T09:56:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:03:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      }
+    ],
+    "maintenance_history": [
+      {
+        "wo_id": "WO-2251",
+        "date": "2026-09-05",
+        "type": "corrective",
+        "component": "hydraulic unit",
+        "text": "seal replaced"
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.9333,
+      "performance": 0.9524,
+      "quality": 0.98,
+      "oee": 0.8711
+    },
+    "primary_loss_bucket": "breakdowns",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

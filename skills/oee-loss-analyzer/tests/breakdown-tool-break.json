@@ -1,0 +1,98 @@
+{
+  "id": "breakdown-tool-break",
+  "title": "Repeated tool breakage",
+  "category": "downtime",
+  "note": null,
+  "dataset": {
+    "meta": {
+      "machine_id": "L1-DOWNT-11",
+      "line": "Line 1",
+      "shift": "S2",
+      "date": "2026-09-08",
+      "source": "MES"
+    },
+    "production": {
+      "planned_production_time_min": 480,
+      "downtime_min": 85,
+      "ideal_cycle_time_sec": 60,
+      "total_count": 380,
+      "good_count": 377
+    },
+    "downtime_events": [
+      {
+        "id": "DT-0001",
+        "duration_min": 50,
+        "reason_code": "TOOL_BREAK"
+      },
+      {
+        "id": "DT-0002",
+        "duration_min": 35,
+        "reason_code": "TOOL_BREAK"
+      }
+    ],
+    "quality_events": [
+      {
+        "id": "Q-0001",
+        "defect_code": "DIM_OOT",
+        "count": 3,
+        "phase": "steady_state"
+      }
+    ],
+    "micro_stops": {
+      "count": 12,
+      "total_min": 9,
+      "source": "cycle_log"
+    },
+    "speed_log": [
+      {
+        "ts": "2026-09-08T08:00:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:07:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:14:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T08:21:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T08:28:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      },
+      {
+        "ts": "2026-09-08T08:35:00+02:00",
+        "actual_cycle_time_sec": 69.2
+      },
+      {
+        "ts": "2026-09-08T09:42:00+02:00",
+        "actual_cycle_time_sec": 67.2
+      },
+      {
+        "ts": "2026-09-08T09:49:00+02:00",
+        "actual_cycle_time_sec": 68.2
+      }
+    ]
+  },
+  "expected": {
+    "status": "ok",
+    "metrics": {
+      "availability": 0.8229,
+      "performance": 0.962,
+      "quality": 0.9921,
+      "oee": 0.7854
+    },
+    "primary_loss_bucket": "breakdowns",
+    "root_cause_claim_allowed": true,
+    "confidence_range": [
+      0.7,
+      0.95
+    ],
+    "must_flag": [],
+    "tie_with": []
+  }
+}

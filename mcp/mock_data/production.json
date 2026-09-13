@@ -1,0 +1,38 @@
+[
+  {
+    "machine_id": "L1-PRESS-02",
+    "line": "Line 1",
+    "date": "2026-09-08",
+    "shift": "S1",
+    "product": "ART-4471",
+    "planned_production_time_min": 480,
+    "downtime_min": 62,
+    "ideal_cycle_time_sec": 30,
+    "total_count": 760,
+    "good_count": 742
+  },
+  {
+    "machine_id": "L1-PRESS-02",
+    "line": "Line 1",
+    "date": "2026-09-08",
+    "shift": "S2",
+    "product": "ART-4471",
+    "planned_production_time_min": 480,
+    "downtime_min": 95,
+    "ideal_cycle_time_sec": 30,
+    "total_count": 700,
+    "good_count": 688
+  },
+  {
+    "machine_id": "L2-MILL-07",
+    "line": "Line 2",
+    "date": "2026-09-08",
+    "shift": "S1",
+    "product": "ART-9920",
+    "planned_production_time_min": 480,
+    "downtime_min": 28,
+    "ideal_cycle_time_sec": 45,
+    "total_count": 560,
+    "good_count": 556
+  }
+]
