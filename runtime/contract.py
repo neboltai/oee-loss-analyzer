@@ -29,7 +29,36 @@ def health_document() -> dict[str,Any]:
     }
 
 
+def validate_request(request: dict[str,Any]) -> dict[str,Any]:
+    validated=_validate_request(request, require_run=False)
+    result=analyse(validated["dataset"],ruleset=DEFAULT_RULESET,threshold_overrides=None)
+    engine_status=str(result.get("status") or "data_error")
+    return {
+        "contract_version":CONTRACT_VERSION,
+        "product_id":PRODUCT_ID,
+        "product_version":PRODUCT_VERSION,
+        "engine_version":ENGINE_VERSION,
+        "status":"invalid" if engine_status=="data_error" else ("partial" if engine_status=="insufficient_evidence" else "valid"),
+        "issues":result.get("issues") or [],
+    }
+
+
 def analyze_request(request: dict[str,Any]) -> dict[str,Any]:
+    validated=_validate_request(request, require_run=True)
+    platform_run_id=validated["platform_run_id"]
+    input_fingerprint=validated["input_fingerprint"]
+    dataset=validated["dataset"]
+    configuration=validated["configuration"]
+
+    return {
+        "platform_run_id":platform_run_id,
+        "input_fingerprint":input_fingerprint,
+        "dataset":dataset,
+        "configuration":configuration,
+    }
+
+
+def _validate_request(request: dict[str,Any], *, require_run: bool) -> dict[str,Any]:
     if not isinstance(request,dict):
         raise RuntimeContractError("request must be a JSON object")
     if request.get("contract_version")!=CONTRACT_VERSION:
@@ -42,7 +71,7 @@ def analyze_request(request: dict[str,Any]) -> dict[str,Any]:
         )
 
     platform_run_id=str(request.get("platform_run_id") or "").strip()
-    if not platform_run_id:
+    if require_run and not platform_run_id:
         raise RuntimeContractError("platform_run_id is required")
 
     input_fingerprint=str(request.get("input_fingerprint") or "").strip()
