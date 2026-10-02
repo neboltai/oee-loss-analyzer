@@ -30,32 +30,45 @@ def health_document() -> dict[str,Any]:
 
 
 def validate_request(request: dict[str,Any]) -> dict[str,Any]:
-    validated=_validate_request(request, require_run=False)
-    result=analyse(validated["dataset"],ruleset=DEFAULT_RULESET,threshold_overrides=None)
+    validated=_validate_request(request,require_run=False)
+    configuration=validated["configuration"]
+    ruleset=str(configuration.get("ruleset") or DEFAULT_RULESET)
+    thresholds=configuration.get("thresholds")
+
+    result=analyse(
+        validated["dataset"],
+        ruleset=ruleset,
+        threshold_overrides=thresholds,
+    )
     engine_status=str(result.get("status") or "data_error")
+
     return {
         "contract_version":CONTRACT_VERSION,
         "product_id":PRODUCT_ID,
         "product_version":PRODUCT_VERSION,
         "engine_version":ENGINE_VERSION,
-        "status":"invalid" if engine_status=="data_error" else ("partial" if engine_status=="insufficient_evidence" else "valid"),
+        "status":"invalid" if engine_status=="data_error"
+            else ("partial" if engine_status=="insufficient_evidence" else "valid"),
         "issues":result.get("issues") or [],
     }
 
 
 def analyze_request(request: dict[str,Any]) -> dict[str,Any]:
-    validated=_validate_request(request, require_run=True)
-    platform_run_id=validated["platform_run_id"]
-    input_fingerprint=validated["input_fingerprint"]
-    dataset=validated["dataset"]
+    validated=_validate_request(request,require_run=True)
     configuration=validated["configuration"]
+    ruleset=str(configuration.get("ruleset") or DEFAULT_RULESET)
+    thresholds=configuration.get("thresholds")
 
-    return {
-        "platform_run_id":platform_run_id,
-        "input_fingerprint":input_fingerprint,
-        "dataset":dataset,
-        "configuration":configuration,
-    }
+    result=analyse(
+        validated["dataset"],
+        ruleset=ruleset,
+        threshold_overrides=thresholds,
+    )
+    return normalize_result(
+        platform_run_id=validated["platform_run_id"],
+        input_fingerprint=validated["input_fingerprint"],
+        result=result,
+    )
 
 
 def _validate_request(request: dict[str,Any], *, require_run: bool) -> dict[str,Any]:
@@ -66,9 +79,7 @@ def _validate_request(request: dict[str,Any], *, require_run: bool) -> dict[str,
     if request.get("product_id")!=PRODUCT_ID:
         raise RuntimeContractError("product_id must be oee")
     if request.get("product_version")!=PRODUCT_VERSION:
-        raise RuntimeContractError(
-            f"product_version must be {PRODUCT_VERSION}"
-        )
+        raise RuntimeContractError(f"product_version must be {PRODUCT_VERSION}")
 
     platform_run_id=str(request.get("platform_run_id") or "").strip()
     if require_run and not platform_run_id:
@@ -76,9 +87,9 @@ def _validate_request(request: dict[str,Any], *, require_run: bool) -> dict[str,
 
     input_fingerprint=str(request.get("input_fingerprint") or "").strip()
     configuration_fingerprint=str(request.get("configuration_fingerprint") or "").strip()
-    if len(input_fingerprint)!=64:
+    if len(input_fingerprint)!=64 or any(c not in "0123456789abcdef" for c in input_fingerprint):
         raise RuntimeContractError("input_fingerprint must be a SHA-256 hex digest")
-    if len(configuration_fingerprint)!=64:
+    if len(configuration_fingerprint)!=64 or any(c not in "0123456789abcdef" for c in configuration_fingerprint):
         raise RuntimeContractError("configuration_fingerprint must be a SHA-256 hex digest")
 
     dataset=request.get("dataset")
@@ -89,21 +100,26 @@ def _validate_request(request: dict[str,Any], *, require_run: bool) -> dict[str,
     if not isinstance(configuration,dict):
         raise RuntimeContractError("configuration must be an object")
 
+    unknown=set(configuration)-{"ruleset","thresholds"}
+    if unknown:
+        raise RuntimeContractError(
+            "unsupported runtime configuration keys: "+", ".join(sorted(unknown))
+        )
+
     ruleset=str(configuration.get("ruleset") or DEFAULT_RULESET)
     if ruleset!=DEFAULT_RULESET:
-        raise RuntimeContractError(
-            f"runtime permits only shipped ruleset {DEFAULT_RULESET}"
-        )
+        raise RuntimeContractError(f"runtime permits only shipped ruleset {DEFAULT_RULESET}")
+
     thresholds=configuration.get("thresholds")
     if thresholds is not None and not isinstance(thresholds,dict):
         raise RuntimeContractError("configuration.thresholds must be an object")
 
-    result=analyse(dataset,ruleset=ruleset,threshold_overrides=thresholds)
-    return normalize_result(
-        platform_run_id=platform_run_id,
-        input_fingerprint=input_fingerprint,
-        result=result,
-    )
+    return {
+        "platform_run_id":platform_run_id,
+        "input_fingerprint":input_fingerprint,
+        "dataset":dataset,
+        "configuration":configuration,
+    }
 
 
 def normalize_result(
@@ -151,9 +167,7 @@ def normalize_result(
 
         findings.append({
             "id":finding_id,
-            "classification":str(
-                (result.get("primary_loss") or {}).get("bucket") or "oee-loss"
-            ),
+            "classification":str(finding.get("bucket") or (result.get("primary_loss") or {}).get("bucket") or "oee-loss"),
             "statement":str(finding.get("problem") or "OEE loss finding"),
             "evidence_refs":refs,
             "claim_level":"finding" if cause_gate else "hypothesis",
