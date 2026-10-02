@@ -5,7 +5,7 @@ import json
 import unittest
 from pathlib import Path
 
-from runtime.contract import RuntimeContractError, analyze_request, health_document
+from runtime.contract import RuntimeContractError, analyze_request, health_document, validate_request
 
 ROOT=Path(__file__).resolve().parents[1]
 
@@ -29,6 +29,13 @@ class RuntimeContractTest(unittest.TestCase):
         self.assertEqual("ready",health["status"])
         self.assertEqual("oee",health["product_id"])
         self.assertEqual("0.4.0",health["version"])
+
+    def test_dataset_validation(self):
+        request=self.request()
+        request.pop("platform_run_id")
+        result=validate_request(request)
+        self.assertIn(result["status"],{"valid","partial","invalid"})
+        self.assertEqual("oee",result["product_id"])
 
     def test_analysis_is_normalized(self):
         result=analyze_request(self.request())
