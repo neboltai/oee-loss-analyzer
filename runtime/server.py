@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import hmac
 import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
@@ -59,7 +60,8 @@ class Handler(BaseHTTPRequestHandler):
         token=os.environ.get("OEE_RUNTIME_TOKEN","")
         if not token:
             return False
-        return self.headers.get("Authorization","")==f"Bearer {token}"
+        supplied=self.headers.get("Authorization","")
+        return hmac.compare_digest(supplied,f"Bearer {token}")
 
     def _json(self,status: int,payload: dict[str,Any]) -> None:
         body=json.dumps(payload,ensure_ascii=False,separators=(",",":")).encode("utf-8")
