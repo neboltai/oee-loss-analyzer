@@ -6,7 +6,7 @@ import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
-from runtime.contract import RuntimeContractError, analyze_request, health_document
+from runtime.contract import RuntimeContractError, analyze_request, health_document, validate_request
 
 MAX_BODY_BYTES=int(os.environ.get("OEE_RUNTIME_MAX_BODY_BYTES","26214400"))
 
@@ -21,7 +21,7 @@ class Handler(BaseHTTPRequestHandler):
         self._json(404,{"error":"not_found"})
 
     def do_POST(self) -> None:
-        if self.path!="/api/v1/analysis-runs":
+        if self.path not in {"/api/v1/analysis-runs","/api/v1/validate"}:
             self._json(404,{"error":"not_found"})
             return
         if not self._authorized():
@@ -39,7 +39,7 @@ class Handler(BaseHTTPRequestHandler):
 
         try:
             payload=json.loads(self.rfile.read(length).decode("utf-8"))
-            result=analyze_request(payload)
+            result=validate_request(payload) if self.path=="/api/v1/validate" else analyze_request(payload)
         except (UnicodeDecodeError,json.JSONDecodeError) as exc:
             self._json(400,{"error":"invalid_json","detail":str(exc)})
             return
