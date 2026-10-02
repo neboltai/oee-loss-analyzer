@@ -149,3 +149,12 @@ Do not add production credentials, customer data or identifiable plant informati
 ## License
 
 Released under the [MIT License](LICENSE).
+
+
+## Indulayer runtime bridge
+
+The deterministic engine can be exposed to the Indulayer control plane through the optional thin HTTP bridge under `runtime/`.
+
+This bridge adds transport and result normalization only. OEE formulas, loss classification and evidence gates remain owned by the existing engine.
+
+See `runtime/README.md`. A successful runtime health check or adapter test is not field validation.
